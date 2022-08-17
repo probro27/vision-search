@@ -90,9 +90,8 @@ async function getData(wordList, dbWordTags, dbDomainCount, res, pageNumber) {
         for(var index in obj){
             if(!isNaN(index)){
                 obj[index].map((url)=>{
-                    if (ratedLinks[url])
-                    {
-                    ratedLinks[url] = ratedLinks[url]*index;
+                    if (ratedLinks[url]){
+                        ratedLinks[url] = ratedLinks[url]*index;
                     }
                     else{
                         ratedLinks[url]=index*1;
@@ -100,6 +99,7 @@ async function getData(wordList, dbWordTags, dbDomainCount, res, pageNumber) {
                 }) 
             }
         }})
+
     // extract domain from links ... 
     for(var url in ratedLinks){
         var host = url.replace('http://','').replace('https://','').split(/[/?#]/)[0];
@@ -126,10 +126,9 @@ async function getData(wordList, dbWordTags, dbDomainCount, res, pageNumber) {
     for (let step = 0; step < 20; step++) {
         if ((step*pageNumber) < len) {
             const val = finalResults[step*pageNumber]
-            final.push([val[0],val[1]])
-
+            final.push([val[0],getTitle(val[0])])
         }}
-    console.log(final)
+    console.log("results sent")
     res.send(final)
 }
 
