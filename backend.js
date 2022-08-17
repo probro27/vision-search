@@ -4,7 +4,7 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 // const cheerio = require('cheerio');
 // const jsdom = require("jsdom");
-var DOMParser = require('xmldom').DOMParser;
+var DOMParser1 = require('xmldom').DOMParser;
 
 async function getTitle(url) {
 //   // get html text from reddit
@@ -19,7 +19,7 @@ async function getTitle(url) {
     return fetch(`https://allorigins.win/${url}`)
     .then((response) => response.text())
     .then((html) => {
-        const doc = new DOMParser().parseFromString(html, "text/html");
+        const doc = new DOMParser1().parseFromString(html, "text/html");
         const title = doc.querySelectorAll('title')[0];
         return title.innerText;
     });
