@@ -36,7 +36,7 @@ async function getTitle(url) {
 require('dotenv').config(); 
 
 const app= express(); 
-const port = process.env.PORT || 5000; 
+const port = process.env.PORT || 8080; 
 
 const uri = process.env.ATLAS_URI; 
 // const uri = "mongodb+srv://admin:<password>$@web-map.qzzvr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
@@ -141,9 +141,10 @@ async function getData(wordList, dbWordTags, dbDomainCount, res, pageNumber) {
     for (let step = 0; step < 20; step++) {
         if ((step*pageNumber) < len) {
             const val = finalResults[step*pageNumber]
-            final.push([val[0],getTitle(val[0])])
+            title = await getTitle(val[0])
+            final.push([val[0],title])
         }}
-    console.log("results sent")
+    // console.log(final)
     res.send(final)
 }
 
