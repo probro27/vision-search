@@ -8,21 +8,28 @@ var DOMParser1 = require('xmldom').DOMParser;
 
 async function getTitle(url) {
 //   // get html text from reddit
-//   const response = await fetch(url);
-//   // using await to ensure that the promise resolves
-//   const body = await response.text();
+    try {
+        const response = await fetch(url);
+        // using await to ensure that the promise resolves
+        const body = await response.text();
 
-//   // parse the html text and extract titles
-//   const $ = cheerio.load(body);
-//   const title = $("head > title").text().trim();
-//   console.log(title);
-    return fetch(`https://allorigins.win/${url}`)
-    .then((response) => response.text())
-    .then((html) => {
-        const doc = new DOMParser1().parseFromString(html, "text/html");
-        const title = doc.querySelectorAll('title')[0];
-        return title.innerText;
-    });
+        // parse the html text and extract titles
+        const $ = cheerio.load(body);
+        const title = $("head > title").text().trim();
+        console.log(title);
+        return title;
+    } catch (e) {
+        console.log(`Exception ${e}`);
+        return url;
+    }
+    
+    // return fetch(`https://allorigins.win/${url}`)
+    // .then((response) => response.text())
+    // .then((html) => {
+    //     const doc = new DOMParser1().parseFromString(html, "text/html");
+    //     const title = doc.querySelectorAll('title')[0];
+    //     return title.innerText;
+    // });
 };
 
 
