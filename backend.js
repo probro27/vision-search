@@ -2,7 +2,9 @@
 const express = require('express'); 
 const cors = require('cors'); 
 const fetch = require('node-fetch');
-const cheerio = require('cheerio');
+// const cheerio = require('cheerio');
+// const jsdom = require("jsdom");
+var DOMParser = require('xmldom').DOMParser;
 
 async function getTitle(url) {
 //   // get html text from reddit
